@@ -1,0 +1,65 @@
+<div class="">
+
+    <div class="">
+        <div>
+            <mat-form-field>
+                <button mat-button matPrefix mat-icon-button *ngIf="showCategory">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                <button mat-button matPrefix mat-icon-button *ngIf="!showCategory" (click)="clearQuery()">
+                    <mat-icon>remove_circle</mat-icon>
+                  </button>
+                <input matInput class="searchInput" type="text" [formControl]="query" placeholder="Search for artists ,albums ,playlists">
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showCategory && categories" class="container">
+    <div class="resultsTitle">
+        <h1>Categories</h1>
+    </div>
+    <div class="centered">
+        <div class="cards ">
+            <div *ngFor="let category of categories " class="card category">
+                <app-category-box [category]="category"></app-category-box>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!showCategory">
+    <div *ngIf="artists" class="container">
+        <div class="resultsTitle">
+            <h1>Artists</h1>
+            <div class="showMore" *ngIf="limitArtists< artists.length"><a (click)="limitArtists=artists.length;" herf="">Show more</a></div>
+        </div>
+        <div class="cards ">
+            <div *ngFor="let res of artists | slice : 0 : limitArtists " class="card {{res.type}}">
+                <app-search-item [data]="res"></app-search-item>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="albums" class="container">
+        <div class="resultsTitle">
+            <h1>Albums</h1>
+            <div class="showMore" *ngIf="limitAlbums< albums.length"><a (click)="limitAlbums=albums.length;" herf="">Show more</a></div>
+        </div>
+        <div class="cards ">
+            <div *ngFor="let res of albums | slice : 0 : limitAlbums " class="card {{res.type}}">
+                <app-search-item [data]="res"></app-search-item>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="playlists" class="container">
+        <div class="resultsTitle">
+            <h1>Playlists</h1>
+            <div class="showMore" *ngIf="limitPlaylists< playlists.length"><a (click)="limitPlaylists=playlists.length;" herf="">Show more</a></div>
+        </div>
+        <div class="cards ">
+            <div *ngFor="let res of playlists | slice : 0 : limitPlaylists " class="card {{res.type}}">
+                <app-search-item [data]="res"></app-search-item>
+            </div>
+        </div>
+    </div>
+</div>

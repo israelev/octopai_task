@@ -1,0 +1,4 @@
+<mat-card *ngIf="show" class="card " routerLink="{{path}}">
+    <img mat-card-image src="{{_category.icons[0].url}}" alt="{{_category.name}}" *ngIf="_category.icons.length">
+    <p class="categoryName"> {{_category.name}} </p>
+</mat-card>

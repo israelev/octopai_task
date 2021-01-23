@@ -1,0 +1,7 @@
+<mat-card *ngIf="show" class="card {{config.type}}" routerLink="{{path}}">
+    <img mat-card-image src="{{_playlist.images[0].url}}" alt="{{_playlist.name}}" *ngIf="_playlist.images.length">
+    <mat-card-content>
+        <p class=""> {{_playlist.name}} </p>
+        <p class="" *ngIf="config.showDescription"> {{_playlist.description}} </p>
+    </mat-card-content>
+</mat-card>

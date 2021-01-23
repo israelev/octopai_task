@@ -1,0 +1,16 @@
+<div class="title">
+    <h1>{{id}} </h1>
+</div>
+<div *ngIf="playlists">
+
+    <div class="resultsTitle">
+        <h1>Popular playlists</h1>
+        <div class="showMore" *ngIf="limitPlaylists< playlists.length"><a (click)="limitPlaylists=playlists.length;" herf="">Show more</a></div>
+    </div>
+
+    <div class="cards ">
+        <div *ngFor="let playlist of playlists | slice : 0 : limitPlaylists " class="card playlist">
+            <app-playlist-box [playlist]="playlist" [config]="playlistConfig"></app-playlist-box>
+        </div>
+    </div>
+</div>

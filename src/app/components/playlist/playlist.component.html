@@ -1,0 +1,80 @@
+<div *ngIf="playlist">
+    <mat-card class="card ">
+        <img mat-card-image src="{{playlist.images[0].url}}" alt="{{playlist.name}}" *ngIf="playlist.images.length">
+        <mat-card-content class="content">
+            <p class="playlistName" *ngIf="!playlist.isEditbale"> {{playlist.name}} </p>
+            <div *ngIf="playlist.isEditbale">
+                <mat-form-field>
+                    <input matInput class="searchInput" type="text" [formControl]="playlistName">
+
+                </mat-form-field>
+
+            </div>
+            <p class="playlistDescription"> {{playlist.description}} </p>
+        </mat-card-content>
+    </mat-card>
+
+
+
+    <table mat-table [dataSource]="trackDS">
+
+
+        <ng-container matColumnDef="title">
+            <th *matHeaderCellDef>TITLE</th>
+            <td *matCellDef="let item">
+                <div style="display: inline-flex;">
+                    <img src="{{item.img}}">
+                    <div style="padding-left: 15px;">
+                        {{item.name}}
+
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="album">
+            <th *matHeaderCellDef>ALBUM</th>
+            <td *matCellDef="let item">
+                {{item.album}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="dateAdded">
+            <th *matHeaderCellDef>DATE ADDED</th>
+            <td *matCellDef="let item">
+                {{item.dateAdded | date}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="dur">
+            <th *matHeaderCellDef>
+                <mat-icon>access_time</mat-icon>
+            </th>
+            <td *matCellDef="let item">
+                {{item.dur| formatDuration}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th *matHeaderCellDef>
+                Action
+            </th>
+            <td *matCellDef="let item">
+                <button mat-button matPrefix mat-icon-button (click)="likeClick(item)">
+                    <mat-icon tiltle="Add to favorite">{{item.likedIcon}}</mat-icon>
+                  </button>
+                <button mat-button matPrefix mat-icon-button *ngIf="!playlist.isEditbale" (click)="addToMyPlaylistClick(item)">
+                    <mat-icon tiltle="Add to my playlist">library_add</mat-icon>
+                  </button>
+                <button mat-button matPrefix mat-icon-button *ngIf="playlist.isEditbale" (click)="removeFromMyPlaylist(item)">
+                    <mat-icon tiltle="Remove from my playlist">remove</mat-icon>
+                  </button>
+            </td>
+        </ng-container>
+
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+    </table>
+
+</div>
