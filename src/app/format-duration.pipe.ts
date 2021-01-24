@@ -8,9 +8,9 @@ export class FormatDurationPipe implements PipeTransform {
   transform(value: number): string {
    
     let secValue=Math.floor(value / 1000);  
-    let hours = Math.floor(secValue / 3600);  
-    let minutes =Math.floor(secValue / 60);  
-    let sec = secValue % 60;
+    let hours:any = Math.floor(secValue / 3600);  
+    let minutes:any =Math.floor(secValue / 60);  
+    let sec:any = secValue % 60;
   if(hours<10){
     hours ='0'+hours;
   }
